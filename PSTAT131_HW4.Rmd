@@ -40,7 +40,7 @@ titanic <- read.csv(file = "data/titanic.csv") %>%
   mutate(survived = factor(survived, 
                            levels = c("Yes", "No")),
          pclass = factor(pclass))
-titanic
+head(titanic)
 # check whether *"Yes"* is the first level 
 levels(titanic$survived)
 
@@ -80,11 +80,10 @@ titanic_folds
 In your own words, explain what we are doing in Question 2. What is *k*-fold cross-validation? Why should we use it, rather than simply fitting and testing models on the entire training set? If we **did** use the entire training set, what resampling method would that be?
 
 #### Answer
-* 1.In Qurstion2, we are randomly dividing the training data into 10  groups (or folds) of (roughly) equal sizes.
-
+* 1. In Qurstion2, we are randomly dividing the training data into 10  groups (or folds) of (roughly) equal sizes.
 * 2. According to the textbook, *k*-fold cross-validation is an approach that involves randomly dividing the set of observations into k groups, or folds, of approximately equal size. The first fold is treated as a validation set, and the method is fit on the remaining $k-1$ folds. The mean squared error, $MSE_1$, is then computed on the observations in the held-out fold. This procedure is repeated k times; each time, a different group of observations is treated as a validation set. This process results in k estimates of the test error, $MSE_1$, $MSE_2$,...,$MSE_k$. The k-fold CV estimate is computed by averaging these value. (Page 203)
-* 3.According to the TA, if we simply fit and test models on the entire training set, it may cause overfitting. To avoid causing overfitting, we should use *k*-fold cross-validation.
-* 4.Bootstrap 
+* 3. According to the TA, if we simply fit and test models on the entire training set, it may cause overfitting. To avoid causing overfitting, we should use *k*-fold cross-validation.
+* 4. Bootstrap 
 
 
 ### Question 4
@@ -117,7 +116,7 @@ log_wkflow <- workflow() %>%
   add_model(log_reg) %>% 
   add_recipe(titanic_recipe)
 
-# log_fit <- fit(log_wkflow, titanic_train)
+
 ```
 
 ```{r}
@@ -130,7 +129,7 @@ lda_wkflow <- workflow() %>%
   add_model(lda_mod) %>% 
   add_recipe(titanic_recipe)
 
-# lda_fit <- fit(lda_wkflow, titanic_train)
+
 ```
 
 ```{r}
@@ -143,10 +142,9 @@ qda_wkflow <- workflow() %>%
   add_model(qda_mod) %>% 
   add_recipe(titanic_recipe)
 
-# qda_fit <- fit(qda_wkflow, titanic_train)
 ```
 
-#### How many models, total, across all folds, will you be fitting to the data? 
+* How many models, total, across all folds, will you be fitting to the data? 
 * Answer:
 Since we have 3 different types of models for all 10 folds, then we will fit 30 models in total to the data.
 
@@ -229,8 +227,8 @@ collect_metrics(log_fit)
 
 
 ```
-* My model’s testing accuracy is 0.8044693
-* My model's average accuracy across folds is 0.8119131
+* My model’s testing accuracy is 0.804
+* My model's average accuracy across folds is 0.806 
 * We can see that the model’s testing accuracy is less than the model's average accuracy across folds. 
 
 
