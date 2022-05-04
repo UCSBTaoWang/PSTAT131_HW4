@@ -412,7 +412,7 @@ library(klaR) # for naive bayes</code></pre>
 ## x dplyr::select()   masks MASS::select()
 ## x yardstick::spec() masks readr::spec()
 ## x recipes::step()   masks stats::step()
-## • Use tidymodels_prefer() to resolve common conflicts.</code></pre>
+## • Learn how to get started at https://www.tidymodels.org/start/</code></pre>
 <pre class="r"><code>library(corrplot)</code></pre>
 <pre><code>## corrplot 0.92 loaded</code></pre>
 <pre class="r"><code>library(discrim)</code></pre>
@@ -517,8 +517,10 @@ would that be?</p>
 <div id="answer" class="section level4">
 <h4>Answer</h4>
 <ul>
-<li><p>1.In Qurstion2, we are randomly dividing the training data into
-10 groups (or folds) of (roughly) equal sizes.</p></li>
+<li><ol style="list-style-type: decimal">
+<li>In Qurstion2, we are randomly dividing the training data into 10
+groups (or folds) of (roughly) equal sizes.</li>
+</ol></li>
 <li><ol start="2" style="list-style-type: decimal">
 <li>According to the textbook, <em>k</em>-fold cross-validation is an
 approach that involves randomly dividing the set of observations into k
@@ -529,10 +531,14 @@ each time, a different group of observations is treated as a validation
 set. This process results in k estimates of the test error, <span class="math inline">\(MSE_1\)</span>, <span class="math inline">\(MSE_2\)</span>,…,<span class="math inline">\(MSE_k\)</span>. The k-fold CV estimate is computed
 by averaging these value. (Page 203)</li>
 </ol></li>
-<li><p>3.According to the TA, if we simply fit and test models on the
-entire training set, it may cause overfitting. To avoid causing
-overfitting, we should use <em>k</em>-fold cross-validation.</p></li>
-<li><p>4.Bootstrap</p></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>According to the TA, if we simply fit and test models on the entire
+training set, it may cause overfitting. To avoid causing overfitting, we
+should use <em>k</em>-fold cross-validation.</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: decimal">
+<li>Bootstrap</li>
+</ol></li>
 </ul>
 </div>
 </div>
@@ -580,14 +586,12 @@ qda_mod &lt;- discrim_quad() %&gt;%
 qda_wkflow &lt;- workflow() %&gt;% 
   add_model(qda_mod) %&gt;% 
   add_recipe(titanic_recipe)</code></pre>
-<div id="how-many-models-total-across-all-folds-will-you-be-fitting-to-the-data" class="section level4">
-<h4>How many models, total, across all folds, will you be fitting to the
-data?</h4>
 <ul>
+<li>How many models, total, across all folds, will you be fitting to the
+data?</li>
 <li>Answer: Since we have 3 different types of models for all 10 folds,
 then we will fit 30 models in total to the data.</li>
 </ul>
-</div>
 </div>
 <div id="question-5" class="section level3">
 <h3>Question 5</h3>
@@ -660,15 +664,14 @@ model’s performance on the testing data!</p>
 folds. Describe what you see.</p>
 <pre class="r"><code># 1. use `predict()`, `bind_cols()`, and `accuracy()` to assess your model’s performance 
 # on the testing data!
-log_fit_test&lt;- fit(lm_fit, titanic_test)
-log_acc &lt;- predict(log_fit_test, new_data = titanic_test, type = &quot;class&quot;) %&gt;% 
+log_acc &lt;- predict(lm_fit, new_data = titanic_test, type = &quot;class&quot;) %&gt;% 
   bind_cols(titanic_test %&gt;% select(survived)) %&gt;% 
   accuracy(truth = survived, estimate = .pred_class)
 log_acc # it tells us the model’s testing accuracy</code></pre>
 <pre><code>## # A tibble: 1 × 3
 ##   .metric  .estimator .estimate
 ##   &lt;chr&gt;    &lt;chr&gt;          &lt;dbl&gt;
-## 1 accuracy binary         0.804</code></pre>
+## 1 accuracy binary         0.782</code></pre>
 <pre class="r"><code># Recall, the model&#39;s average accuracy across folds 
 collect_metrics(log_fit)</code></pre>
 <pre><code>## # A tibble: 2 × 6
@@ -677,8 +680,8 @@ collect_metrics(log_fit)</code></pre>
 ## 1 accuracy binary     0.806    10  0.0195 Preprocessor1_Model1
 ## 2 roc_auc  binary     0.850    10  0.0188 Preprocessor1_Model1</code></pre>
 <ul>
-<li>My model’s testing accuracy is 0.8044693</li>
-<li>My model’s average accuracy across folds is 0.8119131</li>
+<li>My model’s testing accuracy is 0.782</li>
+<li>My model’s average accuracy across folds is 0.806</li>
 <li>We can see that the model’s testing accuracy is less than the
 model’s average accuracy across folds.</li>
 </ul>

@@ -3,8 +3,8 @@ title: "PSTAT131_HW4"
 author: "Tao Wang"
 date: '2022-05-02'
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 Load the data from `data/titanic.csv` into *R* and familiarize yourself with the variables it contains using the codebook (`data/titanic_codebook.txt`).
@@ -204,7 +204,6 @@ lm_fit <- fit(log_wkflow, titanic_train)
 ```
 
 
-
 ### Question 8
 
 Finally, with your fitted model, use `predict()`, `bind_cols()`, and `accuracy()` to assess your model’s performance on the testing data!
@@ -214,8 +213,7 @@ Compare your model’s testing accuracy to its average accuracy across folds. De
 ```{r}
 # 1. use `predict()`, `bind_cols()`, and `accuracy()` to assess your model’s performance 
 # on the testing data!
-log_fit_test<- fit(lm_fit, titanic_test)
-log_acc <- predict(log_fit_test, new_data = titanic_test, type = "class") %>% 
+log_acc <- predict(lm_fit, new_data = titanic_test, type = "class") %>% 
   bind_cols(titanic_test %>% select(survived)) %>% 
   accuracy(truth = survived, estimate = .pred_class)
 log_acc # it tells us the model’s testing accuracy
@@ -227,7 +225,7 @@ collect_metrics(log_fit)
 
 
 ```
-* My model’s testing accuracy is 0.804
+* My model’s testing accuracy is 0.782
 * My model's average accuracy across folds is 0.806 
 * We can see that the model’s testing accuracy is less than the model's average accuracy across folds. 
 
