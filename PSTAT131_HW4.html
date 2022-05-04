@@ -412,7 +412,7 @@ library(klaR) # for naive bayes</code></pre>
 ## x dplyr::select()   masks MASS::select()
 ## x yardstick::spec() masks readr::spec()
 ## x recipes::step()   masks stats::step()
-## • Use tidymodels_prefer() to resolve common conflicts.</code></pre>
+## • Use suppressPackageStartupMessages() to eliminate package startup messages</code></pre>
 <pre class="r"><code>library(corrplot)</code></pre>
 <pre><code>## corrplot 0.92 loaded</code></pre>
 <pre class="r"><code>library(discrim)</code></pre>
@@ -589,8 +589,9 @@ qda_wkflow &lt;- workflow() %&gt;%
 <ul>
 <li>How many models, total, across all folds, will you be fitting to the
 data?</li>
-<li>Answer: Since we have 3 different types of models for all 10 folds,
-then we will fit 30 models in total to the data.</li>
+<li>Answer: Since we have 3 different types of models, and for each type
+of model, we have 10 folds. Then, we will fit 30 models in total to the
+data.</li>
 </ul>
 </div>
 <div id="question-5" class="section level3">
@@ -643,10 +644,25 @@ standard error.)</em></p>
 why. <em>(Note: You should consider both the mean accuracy and its
 standard error.)</em></h3>
 <ul>
-<li>By comparing these three models, we can find that the logistic
-regression have the highest mean accuracy and lowest standard error. So,
-we can conclude that the logistic regression has performed the
-best.</li>
+<li><p>Since we should consider both the mean accuracy and its standard
+error, then it will be reasonable for us to consider about the 95 %
+confidence interval for each models. According to the TA, it is good for
+us to treat the mean accuracy (we got in this question) as the sample
+mean, and we can calculate the 95% confidence interval for the
+population mean</p></li>
+<li><p>For logistic model, by what we learned in PSTAT 120B, we know
+that 95% confidence interval is <span class="math inline">\((0.806 -
+1.96*0.0195, 0.806 + 1.96*0.0195) = (0.768,0.844)\)</span></p></li>
+<li><p>For LDA model, by what we learned in PSTAT 120B, we know that 95%
+confidence interval is <span class="math inline">\((0.798 - 1.96*0.0193,
+0.798 + 1.96*0.0193) = (0.760,0.836)\)</span></p></li>
+<li><p>For QDA model, by what we learned in PSTAT 120B, we know that 95%
+confidence interval is <span class="math inline">\((0.785 - 1.96*0.0180,
+0.785 + 1.96*0.0180) = (0.750,0.820)\)</span></p></li>
+<li><p>By comparing these three models, we can find that the logistic
+regression have both highest lower bound and highest upper bound of the
+confidence interval.So, we can conclude that the logistic regression has
+performed the best.</p></li>
 </ul>
 </div>
 <div id="question-7" class="section level3">

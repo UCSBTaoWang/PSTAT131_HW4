@@ -146,7 +146,7 @@ qda_wkflow <- workflow() %>%
 
 * How many models, total, across all folds, will you be fitting to the data? 
 * Answer:
-Since we have 3 different types of models for all 10 folds, then we will fit 30 models in total to the data.
+Since we have 3 different types of models, and for each type of model, we have 10 folds. Then, we will fit 30 models in total to the data.
 
 
 
@@ -190,8 +190,16 @@ collect_metrics(lda_fit)
 collect_metrics(qda_fit)
 ```
 ### Decide which of the 3 fitted models has performed the best. Explain why. *(Note: You should consider both the mean accuracy and its standard error.)*
+* Since we should consider both the mean accuracy and its standard error, then it will be reasonable for us to consider about the 95 % confidence interval for each models. According to the TA, it is good for us to treat the mean accuracy (we got in this question) as the sample mean, and we can calculate the 95% confidence interval for the population mean
 
-* By comparing these three models, we can find that the logistic regression have the highest mean accuracy and lowest standard error. So, we can conclude that the logistic regression has performed the best.
+* For logistic model, by what we learned in PSTAT 120B, we know that 95% confidence interval is $(0.806 - 1.96*0.0195, 0.806 + 1.96*0.0195) = (0.768,0.844)$
+
+* For LDA model, by what we learned in PSTAT 120B, we know that 95% confidence interval is $(0.798 - 1.96*0.0193, 0.798 + 1.96*0.0193) = (0.760,0.836)$
+
+* For QDA model, by what we learned in PSTAT 120B, we know that 95% confidence interval is $(0.785 - 1.96*0.0180, 0.785 + 1.96*0.0180) = (0.750,0.820)$
+
+
+* By comparing these three models, we can find that the logistic regression have both highest lower bound and highest upper bound of the confidence interval.So, we can conclude that the logistic regression has performed the best.
 
 
 
