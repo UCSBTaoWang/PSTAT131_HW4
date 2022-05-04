@@ -199,7 +199,7 @@ collect_metrics(qda_fit)
 * For QDA model, by what we learned in PSTAT 120B, we know that 95% confidence interval is $(0.785 - 1.96*0.0180, 0.785 + 1.96*0.0180) = (0.750,0.820)$
 
 
-* By comparing these three models, we can find that the logistic regression have both highest lower bound and highest upper bound of the confidence interval.So, we can conclude that the logistic regression has performed the best.
+* By comparing these three models, we can find that the logistic regression model have both highest lower bound and highest upper bound of the confidence interval.So, we can conclude that the logistic regression model has performed the best.
 
 
 
