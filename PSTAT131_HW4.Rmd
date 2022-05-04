@@ -3,8 +3,8 @@ title: "PSTAT131_HW4"
 author: "Tao Wang"
 date: '2022-05-02'
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 Load the data from `data/titanic.csv` into *R* and familiarize yourself with the variables it contains using the codebook (`data/titanic_codebook.txt`).
